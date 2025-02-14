@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiOutlineArrowLeft, AiOutlineUpload } from "react-icons/ai";
 import { FaTicketAlt } from "react-icons/fa";
@@ -23,23 +23,23 @@ const UsersDetails = () => {
 
   const isGetTicketDisabled = !name || !email || !avatar || !specialRequest;
 
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userDetails"));
-    if (storedData) {
-      setName(storedData.name || "");
-      setEmail(storedData.email || "");
-      setAvatar(storedData.avatar || "");
-      setSpecialRequest(storedData.specialRequest || "");
-    }
-  }, [location.state]);
+  // useEffect(() => {
+  //   const storedData = JSON.parse(localStorage.getItem("userDetails"));
+  //   if (storedData) {
+  //     setName(storedData.name || "");
+  //     setEmail(storedData.email || "");
+  //     setAvatar(storedData.avatar || "");
+  //     setSpecialRequest(storedData.specialRequest || "");
+  //   }
+  // }, [location.state]);
 
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userDetails"));
-    const newData = { name, email, avatar, specialRequest };
-    if (JSON.stringify(storedData) !== JSON.stringify(newData)) {
-      localStorage.setItem("userDetails", JSON.stringify(newData));
-    }
-  }, [name, email, avatar, specialRequest]);
+  // useEffect(() => {
+  //   const storedData = JSON.parse(localStorage.getItem("userDetails"));
+  //   const newData = { name, email, avatar, specialRequest };
+  //   if (JSON.stringify(storedData) !== JSON.stringify(newData)) {
+  //     localStorage.setItem("userDetails", JSON.stringify(newData));
+  //   }
+  // }, [name, email, avatar, specialRequest]);
 
   const validateForm = () => {
     let errors = {};
