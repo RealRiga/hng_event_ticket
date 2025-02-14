@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 const UsersDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [step, setStep] = useState(2);
   const { selectedTicket, ticketCount } = location.state || {};
 
   const [name, setName] = useState("");
@@ -129,12 +130,12 @@ const UsersDetails = () => {
       <div className="bg-[#07373F] p-8 rounded-lg w-full max-w-lg">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Attendee Details</h2>
-          <span className="text-sm">Step 2/3</span>
+          <span className="text-sm">Step {step}/2</span>
         </div>
         <div className="w-full h-2 bg-gray-700 rounded-md overflow-hidden mb-4">
-          <div
+        <div
             className="h-full bg-[#24A0B5] transition-all duration-500"
-            style={{ width: "66%" }}
+            style={{ width: `${(step / 2) * 100}%` }}
           ></div>
         </div>
         <div className="bg-[#07373F] p-6 text-white rounded-lg shadow-lg w-full">
