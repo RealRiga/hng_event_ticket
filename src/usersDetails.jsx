@@ -122,9 +122,6 @@ const UsersDetails = () => {
     onDrop: (acceptedFiles) => uploadImageToCloudinary(acceptedFiles[0]),
   });
 
-
-
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#0E464F] p-6 sm:p-8 text-white w-full">
       <div className="bg-[#07373F] p-8 rounded-lg w-full max-w-lg">
@@ -133,7 +130,7 @@ const UsersDetails = () => {
           <span className="text-sm">Step {step}/2</span>
         </div>
         <div className="w-full h-2 bg-gray-700 rounded-md overflow-hidden mb-4">
-        <div
+          <div
             className="h-full bg-[#24A0B5] transition-all duration-500"
             style={{ width: `${(step / 2) * 100}%` }}
           ></div>
@@ -204,7 +201,14 @@ const UsersDetails = () => {
               <button
                 type="button"
                 className="flex items-center gap-2 bg-gray-500 text-white h-1/2 mb-4 py-2 px-6 rounded-lg"
-                onClick={() => navigate(-1)}
+                onClick={() => {
+                  localStorage.removeItem("userDetails");
+                  setName("");
+                  setEmail("");
+                  setAvatar("");
+                  setSpecialRequest("");
+                  navigate(-1);
+                }}
               >
                 <AiOutlineArrowLeft size={20} /> Back
               </button>

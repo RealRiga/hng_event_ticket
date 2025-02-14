@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
 import Barcode from "react-barcode";
 import { FaDownload } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import techember from "./assets/Heading.png";
+// import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image";
 
 const Ticket = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const ticketData = location?.state?.ticket;
+  const ticketRef = useRef(null);
 
   if (!ticketData) {
     return (
@@ -15,14 +18,34 @@ const Ticket = () => {
     );
   }
 
+  
+
+  // Function to download ticket as image
+  const downloadTicket = () => {
+    if (ticketRef.current) {
+      domtoimage
+        .toPng(ticketRef.current) // Use domtoimage.toPng
+        .then(function (dataUrl) {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "ticket.png";
+          link.click();
+        })
+        .catch(function (error) {
+          console.error("Error downloading image:", error);
+        });
+    }
+  };
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#0E464F] p-8 sm:p-6 md:p-8 text-white w-full">
+    <div ref={ticketRef} className="flex flex-col items-center justify-center min-h-screen bg-[#0E464F] p-8 sm:p-6 md:p-8 text-white w-full">
       <h1 className="text-xl sm:text-2xl font-bold text-center">
         Your Ticket is Booked!
       </h1>
 
       {/* Ticket Card */}
-      <div className="bg-[#07373F] p-4 sm:p-6 rounded-lg shadow-lg relative mt-6 border border-gray-700 w-full max-w-md mx-auto">
+      <div
+        className="bg-[#07373F] p-4 sm:p-6 rounded-lg shadow-lg relative mt-6 border border-gray-700 w-full max-w-md mx-auto"
+      >
         {/* Ticket Header */}
         <div className="p-4 rounded-lg text-center">
           <img
@@ -78,11 +101,16 @@ const Ticket = () => {
       <div className="flex flex-col sm:flex-row gap-4 mt-6">
         <button
           className="bg-gray-700 px-6 py-2 rounded-md text-white hover:bg-gray-600 w-full sm:w-auto"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/", { state: null });
+          }}
         >
           Book Another Ticket
         </button>
-        <button className="bg-blue-500 px-6 py-2 rounded-md text-white flex items-center justify-center gap-2 hover:bg-blue-600 w-full sm:w-auto">
+        <button
+          className="bg-blue-500 px-6 py-2 rounded-md text-white flex items-center justify-center gap-2 hover:bg-blue-600 w-full sm:w-auto"
+          onClick={downloadTicket}
+        >
           <FaDownload /> Download Ticket
         </button>
       </div>

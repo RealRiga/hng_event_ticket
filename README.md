@@ -31,7 +31,7 @@ This project is a simple event ticketing system built with **React.js** and **Ta
 - **Tailwind CSS** for styling.
 - **React Icons** for input field icons.
 - **Cloudinary** for image uploads.
-- **Toastify** for notifications.
+- **Toastify** for notifications and so on
 
 ## How to Run the Project
 1. Clone the repository:
