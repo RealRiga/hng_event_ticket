@@ -31,7 +31,7 @@ const UsersDetails = () => {
       setAvatar(storedData.avatar || "");
       setSpecialRequest(storedData.specialRequest || "");
     }
-  }, []);
+  }, [location.state]);
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userDetails"));
@@ -207,7 +207,7 @@ const UsersDetails = () => {
                   setEmail("");
                   setAvatar("");
                   setSpecialRequest("");
-                  navigate(-1);
+                  navigate(-1, { replace: true });
                 }}
               >
                 <AiOutlineArrowLeft size={20} /> Back
